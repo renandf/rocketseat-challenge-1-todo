@@ -1,21 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { TaskProps } from '../App'
 import iconPlus from '../assets/icon-plus.svg'
 
 import styles from './AddTask.module.css'
 
-export interface TaskType {
-  id: string;
-  title: string;
-  isDone: boolean;
-}
-
-// interface TaskProps {
-//   task: TaskType;
-// }
-
-function AddTask() {
-  const [tasks, setTasks] = useState<TaskType[]>([])
+function AddTask({ tasks, setTasks }: TaskProps) {
   const [newTaskText, setNewTaskText] = useState('')
 
   // Updates the input value whenever it changes
