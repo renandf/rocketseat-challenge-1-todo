@@ -1,0 +1,13 @@
+.addTaskForm {
+  position: absolute;
+  top: -1.25rem;
+  width: 100%;
+}
+
+.addTaskForm input {
+  background-color: var(--gray-500);
+  width: 100%;
+  border: 1px transparent;
+  padding: .75rem;
+  border-radius: var(--border-radius-md);
+}

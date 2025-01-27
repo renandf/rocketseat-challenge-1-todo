@@ -16,6 +16,8 @@
   --purple-500: #5E60CE;
 
   --red-500: #E25858;
+
+  --border-radius-md: 8px;
 }
 
 * {
