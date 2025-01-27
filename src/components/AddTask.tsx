@@ -45,6 +45,7 @@ function AddTask({ tasks, setTasks }: TaskProps) {
         placeholder="Type new task here..."
         value={newTaskText}
         onChange={handleTaskTextChange}
+        autoFocus
         required
       />
       <button

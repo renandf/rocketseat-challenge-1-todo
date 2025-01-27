@@ -2,12 +2,13 @@ import { useState } from 'react'
 import Header from './components/Header'
 import AddTask from './components/AddTask'
 import Placeholder from './components/Placeholder'
+import Task from './components/Task'
 
 import styles from './App.module.css'
 
 import './global.css'
 
-interface TaskType {
+export interface TaskType {
   id: string;
   title: string;
   isDone: boolean;
@@ -25,10 +26,23 @@ function App() {
     <>
       <Header />
 
-      <div className={styles.wrapper}>
+      <main className={styles.wrapper}>
         <AddTask tasks={tasks} setTasks={setTasks} />
-        <Placeholder />
-      </div>
+        {tasks.length === 0 ? (
+          <Placeholder />
+        ) : (
+          tasks.map(task => {
+            return (
+              <Task
+                key={task.id}
+                id={task.id}
+                title={task.title}
+                isDone={task.isDone}
+              />
+            )
+          })
+        )}
+      </main>
     </>
   )
 }
