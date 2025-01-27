@@ -1,9 +1,9 @@
-import './App.css'
+import './global.css'
 
 function App() {
   return (
     <>
-      
+      <p>Test</p>
     </>
   )
 }
