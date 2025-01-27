@@ -1,23 +1,69 @@
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
+import iconPlus from '../assets/icon-plus.svg'
+
 import styles from './AddTask.module.css'
 
+export interface TaskType {
+  id: string;
+  title: string;
+  isDone: boolean;
+}
+
+// interface TaskProps {
+//   task: TaskType;
+// }
+
 function AddTask() {
+  const [tasks, setTasks] = useState<TaskType[]>([])
   const [newTaskText, setNewTaskText] = useState('')
 
-  function handleNewTask() {
-
+  // Updates the input value whenever it changes
+  function handleTaskTextChange(
+    e: ChangeEvent<HTMLInputElement>
+  ) {
+    setNewTaskText(e.target.value)
   }
+
+  function handleNewTask(e: FormEvent) {
+    // Prevent page refresh after form submission
+    e.preventDefault()
+
+    // Set the new task object
+    const newTask = {
+      id: uuidv4(),
+      title: newTaskText,
+      isDone: false,
+    }
+
+    // Update state with new task
+    setTasks([...tasks, newTask])
+
+    // Empty the input by clearing the state
+    setNewTaskText('')
+  }
+
+  const isCommentEmpty = newTaskText.length === 0
 
   return (
     <form
       className={styles.addTaskForm}
-      action={handleNewTask}
+      onSubmit={handleNewTask}
     >
       <input
         type="text"
+        placeholder="Type new task here..."
         value={newTaskText}
+        onChange={handleTaskTextChange}
         required
       />
+      <button
+        type="submit"
+        disabled={isCommentEmpty}
+      >
+        Add task
+        <img src={iconPlus} alt="Plus icon" />
+      </button>
     </form>
   )
 }

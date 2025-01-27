@@ -1,9 +1,10 @@
-import { Header } from './components/Header'
+import Header from './components/Header'
+import AddTask from './components/AddTask'
+import Placeholder from './components/Placeholder'
 
 import styles from './App.module.css'
 
 import './global.css'
-import AddTask from './components/AddTask'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 
       <div className={styles.wrapper}>
         <AddTask />
+        <Placeholder />
       </div>
     </>
   )

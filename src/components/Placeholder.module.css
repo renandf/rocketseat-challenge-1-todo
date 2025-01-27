@@ -1,0 +1,11 @@
+.placeholder {
+  padding: 4rem 2rem;
+  color: var(--gray-300);
+  font-size: var(--font-size-sm);
+  text-align: center;
+
+  img {
+    margin-block: .5rem;
+    width: 3rem;
+  }
+}

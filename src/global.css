@@ -18,6 +18,15 @@
   --red-500: #E25858;
 
   --border-radius-md: 8px;
+
+  --font-weight-default: 400;
+  --font-weight-bold: 700;
+  --font-size-sm: .875rem;
+}
+
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--blue-500);
 }
 
 * {
@@ -37,6 +46,7 @@ input,
 textarea,
 button {
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  font-weight: var(--font-weight-default);
   font-size: 1rem;
+  line-height: 140%;
 }
