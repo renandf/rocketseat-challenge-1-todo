@@ -1,30 +1,44 @@
 import { useState } from 'react'
 import { TaskType } from '../App'
-import iconPlus from '../assets/icon-plus.svg'
 
 import styles from './Task.module.css'
 
-function Task({ title, isDone }: TaskType) {
+function Task({ id, title, isDone, handleTaskDelete }: TaskType) {
   const [taskState, setTaskState] = useState(isDone)
 
   function handleTaskToggle() {
     setTaskState(!taskState)
   }
 
-  const doneClass = taskState ? styles.taskDone : ''
+  // function handleTaskDelete(id: string) {
+  //   const arrayWithoutItem = 
+  // }
 
   return (
-    <div className={`${styles.task} ${doneClass}`}>
-      <img src={iconPlus} alt="Plus icon" />
-      <p>{title}</p>
-      <button
-        onClick={handleTaskToggle}
-      >
-        Test
+    <div className={styles.task}>
+      <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          id={id}
+          onChange={handleTaskToggle}
+          checked={taskState === true}
+        />
+        <label htmlFor={id}>
+          <span>
+            <svg width="12px" height="9px" viewBox="0 0 12 9">
+              <polyline points="1 5 4 8 11 1"></polyline>
+            </svg>
+          </span>
+          <span>{title}</span>
+        </label>
+      </div>
+
+      {/* Button renders icon via CSS */}
+      <button onClick={() => handleTaskDelete(id)}>
+        <span>&nbsp;</span>
       </button>
     </div>
   )
 }
-//  + (isDone && styles.done)
 
 export default Task

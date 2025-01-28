@@ -12,6 +12,7 @@ export interface TaskType {
   id: string;
   title: string;
   isDone: boolean;
+  handleTaskDelete: (id: string) => void;
 }
 
 export interface TaskProps {
@@ -21,6 +22,13 @@ export interface TaskProps {
 
 function App() {
   const [tasks, setTasks] = useState<TaskType[]>([])
+
+  function handleTaskDelete(id: string) {
+    const tasksWithoutItem = tasks.filter((task) =>
+      task.id !== id
+    )
+    setTasks(tasksWithoutItem)
+  }
 
   return (
     <>
@@ -38,6 +46,7 @@ function App() {
                 id={task.id}
                 title={task.title}
                 isDone={task.isDone}
+                handleTaskDelete={handleTaskDelete}
               />
             )
           })

@@ -1,21 +1,126 @@
 .task {
   padding: 1rem;
   display: grid;
-  grid-template-columns: min-content 1fr min-content;
+  grid-template-columns: 1fr min-content;
   gap: .75rem;
   background-color: var(--gray-500);
   border-radius: var(--border-radius-md);
 }
-
 .task img {
   width: 1rem;
 }
-
 .task + .task {
   margin-block-start: .75rem;
 }
+.task button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--gray-500);
+  transition: background-color .2s;
+}
+.task button:hover {
+  background-color: var(--gray-400);
+  cursor: pointer;
+}
+.task button span {
+  display: inline-block;
+  width: 13px;
+  background-color: var(--gray-300);
+  -webkit-mask: url(../assets/icon-delete.svg) no-repeat center;
+  mask: url(../assets/icon-delete.svg) no-repeat center;
+  transition: background-color .2s;
+}
+.task button:hover span {
+  background-color: var(--red-500);
+}
 
-.taskDone {
+/* 
+ * 
+ * Checkbox style
+ *
+ */
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+.checkbox label {
+  cursor: pointer;
+  display: flex;
+}
+.checkbox label span {
+  transform: translate3d(0, 0, 0);
+}
+.checkbox label span:first-child {
+  position: relative;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--blue-300);
+  transform: scale(1);
+  transition: transform 0.2s,
+              background-color 0.2s,
+              border-color 0.2s;
+}
+.checkbox label span:first-child svg {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 6px;
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+  transition: stroke-dashoffset .3s,
+              transform .3s;
+}
+.checkbox label span:first-child:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--purple-500);
+  display: block;
+  transform: scale(0);
+  opacity: 1;
+  border-radius: 50%;
+  transition-delay: 0.2s;
+}
+.checkbox label span:last-child {
+  margin-left: .75rem;
+}
+
+.checkbox label:hover span:first-child {
+  border-color: var(--blue-500);
+  background-color: rgba(30, 111, 159, .2);
+}
+
+.checkbox input:checked + label span:first-child {
+  border-color: var(--purple-500);
+  background: var(--purple-500);
+  animation: anim-checked 0.6s;
+}
+.checkbox input:checked + label span:first-child svg {
+  stroke-dashoffset: 0;
+}
+.checkbox input:checked + label span:first-child:before {
+  transform: scale(2.2);
+  opacity: 0;
+  transition: transform .6s, opacity .6s;
+}
+.checkbox input:checked + label span:last-child {
   color: var(--gray-300);
   text-decoration: line-through;
+  transition: color .4s;
+}
+
+@keyframes anim-checked {
+  50% {
+    transform: scale(1.2);
+  }
 }
