@@ -23,6 +23,7 @@
   --font-weight-default: 400;
   --font-weight-bold: 700;
   --font-size-sm: .875rem;
+  --font-size-xs: .75rem;
 }
 
 :focus {

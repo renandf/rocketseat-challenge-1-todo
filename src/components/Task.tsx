@@ -10,10 +10,6 @@ function Task({ id, title, isDone, handleTaskDelete }: TaskType) {
     setTaskState(!taskState)
   }
 
-  // function handleTaskDelete(id: string) {
-  //   const arrayWithoutItem = 
-  // }
-
   return (
     <div className={styles.task}>
       <div className={styles.checkbox}>

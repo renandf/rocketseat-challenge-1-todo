@@ -1,0 +1,24 @@
+.overview {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 5rem 1.4rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.overviewCreated {
+  color: var(--blue-300);
+}
+
+.overviewDone {
+  color: var(--purple-300);
+}
+
+.counter {
+  margin-inline: .5rem;
+  padding: .125rem .5rem;
+  border-radius: 1rem;
+  background: var(--gray-400);
+  font-size: var(--font-size-xs);
+  color: var(--white);
+}
