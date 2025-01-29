@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import Header from './components/Header'
 import TasksOverview from './components/TasksOverview'
 import AddTask from './components/AddTask'
@@ -9,10 +9,11 @@ import styles from './App.module.css'
 
 import './global.css'
 
-export interface TaskType extends HTMLDivElement {
+export interface TaskType {
   id: string;
   title: string;
   isDone: boolean;
+  handleTaskToggle: (id: string, newTaskState: boolean) => void;
   handleTaskDelete: (id: string) => void;
 }
 
@@ -23,14 +24,32 @@ export interface TaskProps {
 
 function App() {
   const [tasks, setTasks] = useState<TaskType[]>([])
-  const totalCreated = useRef(tasks.length)
-  const totalDone = useRef(tasks.filter(task => task.isDone === true).length)
+  const [tasksDone, setTasksDone] = useState(0)
+  const tasksCreated = tasks.length
+
+  function updateTasksDone(tasksArray: TaskType[]) {
+    const tasksDoneCount = tasksArray.filter(task => task.isDone === true).length
+
+    setTasksDone(tasksDoneCount)
+  }
+
+  function handleTaskToggle(id: string, newTaskState: boolean) {
+    const tasksUpdated = tasks
+    const taskIndex = tasks.findIndex(task => task.id === id)
+
+    tasksUpdated[taskIndex].isDone = newTaskState
+
+    setTasks(tasksUpdated)
+    updateTasksDone(tasksUpdated)
+  }
 
   function handleTaskDelete(id: string) {
     const tasksWithoutItem = tasks.filter((task) =>
       task.id !== id
     )
+
     setTasks(tasksWithoutItem)
+    updateTasksDone(tasksWithoutItem)
   }
 
   return (
@@ -40,8 +59,8 @@ function App() {
       <main className={styles.wrapper}>
         <AddTask tasks={tasks} setTasks={setTasks} />
         <TasksOverview
-          totalCreated={totalCreated.current}
-          totalDone={totalDone.current}
+          tasksCreated={tasksCreated}
+          tasksDone={tasksDone}
         />
         {tasks.length === 0 ? (
           <Placeholder />
@@ -53,6 +72,7 @@ function App() {
                 id={task.id}
                 title={task.title}
                 isDone={task.isDone}
+                handleTaskToggle={handleTaskToggle}
                 handleTaskDelete={handleTaskDelete}
               />
             )

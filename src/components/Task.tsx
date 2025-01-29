@@ -3,11 +3,14 @@ import { TaskType } from '../App'
 
 import styles from './Task.module.css'
 
-function Task({ id, title, isDone, handleTaskDelete }: TaskType) {
+function Task({ id, title, isDone, handleTaskToggle, handleTaskDelete }: TaskType) {
   const [taskState, setTaskState] = useState(isDone)
 
-  function handleTaskToggle() {
-    setTaskState(!taskState)
+  function taskToggle() {
+    const newTaskState = !taskState
+    setTaskState(newTaskState)
+
+    handleTaskToggle(id, newTaskState)
   }
 
   return (
@@ -16,7 +19,7 @@ function Task({ id, title, isDone, handleTaskDelete }: TaskType) {
         <input
           type="checkbox"
           id={id}
-          onChange={handleTaskToggle}
+          onChange={taskToggle}
           checked={taskState === true}
         />
         <label htmlFor={id}>

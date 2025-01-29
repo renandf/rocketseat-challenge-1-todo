@@ -1,23 +1,23 @@
 import styles from './TasksOverview.module.css'
 
 interface TasksOverviewProps {
-  totalCreated: number,
-  totalDone: number,
+  tasksCreated: number,
+  tasksDone: number,
 }
 
-function TasksOverview({ totalCreated, totalDone }: TasksOverviewProps) {
+function TasksOverview({ tasksCreated, tasksDone }: TasksOverviewProps) {
 
   return (
     <section className={styles.overview}>
       <div className={styles.overviewCreated}>
         Tasks created
         <span className={styles.counter}>
-          {totalCreated}
+          {tasksCreated}
         </span>
       </div>
       <div className={styles.overviewDone}>
         <span className={styles.counter}>
-          {totalDone} of {totalCreated}
+          {tasksDone} of {tasksCreated}
         </span>
         done
       </div>
